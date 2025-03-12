@@ -1,7 +1,7 @@
 # Jogo da Velha Moderno 🎮 
 
 
-**Clique e Descubra ** - Uma página com o jogo esperando por vc. Acesse agora: <a href="https://jogo-da-velha-4fh2.onrender.com/" style="font-size:120%;" target="_blank">Jogo da Velha Moderno</a>
+**Clique e Descubra ** - Uma página com o jogo esperando por vc. Acesse agora: <a href="https://jogo-da-velha-4fh2.onrender.com" style="font-size:120%;" target="_blank">Jogo da Velha Moderno</a>
 
 **Um projeto em Python com Flask - Feito por um Dev em Aprendizado!**
 
