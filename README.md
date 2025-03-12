@@ -18,9 +18,10 @@ Bem-vindo ao meu **Jogo da Velha Moderno**! Este é um projeto que desenvolvi en
 ---
 
 ## 📸 Visualização do Jogo
-Aqui está como o jogo fica no navegador:  
-![Jogo da Velha Moderno](screenshot.png)  
-*(Nota: Suba uma captura de tela do jogo no GitHub e renomeie como `screenshot.png` na raiz do projeto pra essa imagem aparecer!)*
+
+![Jogo da Velha Moderno](jogo-da-velha.png)
+
+*(Nota: Esta é uma captura de tela do jogo, adicionada ao repositório como `jogo-da-velha.png` pra mostrar meu progresso em aprendizado!)*
 
 ---
 
