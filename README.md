@@ -45,12 +45,19 @@ Vá para http://127.0.0.1:5000 e divirta-se
 ## 📂 Estrutura do Projeto
 
 jogo-da-velha-moderno/ 
+
 ├── app.py # Backend com Flask
-├── templates/ 
+
+├── templates/
+
 │ └── index.html # Interface do jogo 
+
 ├── static/ 
+
 │ └── style.css # Estilos modernos 
-└── README.md # Este arquivo!
+
+└── README.md # Este arquivo
+
 
 🎨 ## Personalizações
 Cores: "X" em vermelho, "O" em azul, fundo com gradiente azul-roxo.
@@ -65,7 +72,8 @@ Integrar HTML, CSS e JavaScript com Python.
 Gerenciar estado do jogo (vitórias, empates, rodadas).
 Fazer um design visual atraente com CSS.
 
-📬 Contato
+📬 Contato :
+
 Feito  por Jose Escudero (um dev em aprendizado!).
 
 "DEV APRENDIZADO" - Porque cada linha de código é um passo adiante!
