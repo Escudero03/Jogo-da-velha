@@ -27,6 +27,21 @@ Bem-vindo ao meu **Jogo da Velha Moderno**! Este é um projeto que desenvolvi en
 
 *(Nota: Esta é uma captura de tela do jogo, adicionada ao repositório como `jogo-da-velha.png` pra mostrar meu progresso em aprendizado!)*
 
+## 🚀 Como Jogar Online
+- Acesse o jogo em: [https://jogo-da-velha.onrender.com](https://jogo-da-velha-4fh2.onrender.com)  
+*(Hospedado no Render com meu repositório do GitHub - um passo do meu aprendizado!)*
+
+## 🛠️ Tecnologias e Frameworks Usados
+
+- **Python**: Linguagem de programação principal do projeto.
+- **Flask**: Framework web leve pra construir o servidor do jogo.
+- **HTML**: Estrutura da interface do usuário no frontend.
+- **CSS**: Estilização moderna com gradientes, sombras e animações.
+- **JavaScript**: Interatividade no frontend, como jogadas e animações.
+- **Git**: Controle de versão pra gerenciar o código.
+- **GitHub**: Plataforma de hospedagem do repositório ([Escudero03/Jogo-da-velha](https://github.com/Escudero03/Jogo-da-velha)).
+- **Render**: Serviço de hospedagem na nuvem pra disponibilizar o jogo online.
+
 ---
 
 ## 🚀 Como Rodar o Projeto
