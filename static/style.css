@@ -25,7 +25,7 @@ h1 {
 }
 
 #message.o-winner {
-    color: #0000ff; /* Azul pro O */
+    color: rgb(10, 236, 10); /* Azul pro O */
 }
 
 #board {
@@ -59,7 +59,7 @@ h1 {
 }
 
 .cell.O { /* Cor do O no tabuleiro */
-    color: #0000ff;
+    color:rgb(10, 236, 10)
 }
 
 p {
