@@ -13,8 +13,8 @@
         {% endfor %}
     </div>
     <p>Jogador atual: <span id="player">{{ player }}</span></p>
-    <p>Pontuação - X: {{ scores['X'] }} | O: {{ scores['O'] }} | Empates: {{ scores['Empates'] }}</p>
-    <p>Rodadas: {{ rounds }}</p>
+    <p id="scores">Pontuação - X: {{ scores['X'] }} | O: {{ scores['O'] }} | Empates: {{ scores['Empates'] }}</p>
+    <p id="rounds">Rodadas: {{ rounds }}</p>
     <button onclick="resetRound()">Reiniciar Rodada</button>
     <button onclick="resetAll()">Zerar Tudo</button>
     <span id="dev">DEV APRENDIZADO</span>
@@ -33,8 +33,8 @@
                     if (data.winner === "Empate") {
                         document.getElementById("message").innerText = "Empate!";
                     } else {
-                        document.getElementById("message").innerText = 
-                            "Vencedor " + (data.winner === "X" ? "X" : "Bolinha") + " ganhou!";
+                        let winnerText = data.winner === "X" ? "X" : "Bolinha";
+                        document.getElementById("message").innerText = "Vencedor " + winnerText + " ganhou!";
                     }
                 } else {
                     document.getElementById("message").innerText = "";
