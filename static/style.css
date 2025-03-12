@@ -118,3 +118,11 @@ p {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
+#message {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    margin: 20px 0;
+    font-weight: bold;
+}

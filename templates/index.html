@@ -1,89 +1,77 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Jogo da Velha Moderno</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Jogo da Velha</h1>
-        <div id="board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
-        <div class="controls">
-            <button id="reset">Reiniciar Rodada</button>
-            <button id="reset-all">Zerar Tudo</button>
-        </div>
-        <p id="status">Vez do Jogador 1 (X)</p>
-        <div class="stats">
-            <p id="rounds">Rodadas: 0</p>
-            <p id="scores">Jogador 1 (X): 0 | Jogador 2 (O): 0 | Empates: 0</p>
-        </div>
+    <h1>Jogo da Velha Moderno</h1>
+    <div id="message"></div>
+    <div id="board">
+        {% for i in range(9) %}
+            <div class="cell" onclick="makeMove({{ i }})">{{ board[i] }}</div>
+        {% endfor %}
     </div>
-    <div class="blinking-text">DEV APRENDIZADO</div>
+    <p>Jogador atual: <span id="player">{{ player }}</span></p>
+    <p>Pontuação - X: {{ scores['X'] }} | O: {{ scores['O'] }} | Empates: {{ scores['Empates'] }}</p>
+    <p>Rodadas: {{ rounds }}</p>
+    <button onclick="resetRound()">Reiniciar Rodada</button>
+    <button onclick="resetAll()">Zerar Tudo</button>
+    <span id="dev">DEV APRENDIZADO</span>
 
     <script>
-        const cells = document.querySelectorAll(".cell");
-        const resetButton = document.getElementById("reset");
-        const resetAllButton = document.getElementById("reset-all");
-        const status = document.getElementById("status");
-        const roundsDisplay = document.getElementById("rounds");
-        const scoresDisplay = document.getElementById("scores");
-
-        cells.forEach(cell => {
-            cell.addEventListener("click", () => {
-                fetch("/play", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                    body: `index=${cell.dataset.index}`
-                })
-                .then(response => response.json())
-                .then(data => updateBoard(data));
-            });
-        });
-
-        resetButton.addEventListener("click", () => {
-            fetch("/reset", { method: "POST" })
+        function makeMove(position) {
+            fetch("/play", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "position=" + position
+            })
             .then(response => response.json())
-            .then(data => updateBoard(data));
-        });
-
-        resetAllButton.addEventListener("click", () => {
-            fetch("/reset_all", { method: "POST" })
-            .then(response => response.json())
-            .then(data => updateBoard(data));
-        });
-
-        function updateBoard(data) {
-            data.board.forEach((value, index) => {
-                cells[index].textContent = value;
-                cells[index].classList.remove("x", "o");
-                if (value === "X") cells[index].classList.add("x");
-                if (value === "O") cells[index].classList.add("o");
-            });
-
-            if (data.winner) {
-                if (data.winner === "Empate") {
-                    status.textContent = "Empate!";
+            .then(data => {
+                updateBoard(data.board);
+                if (data.winner) {
+                    if (data.winner === "Empate") {
+                        document.getElementById("message").innerText = "Empate!";
+                    } else {
+                        document.getElementById("message").innerText = 
+                            "Vencedor " + (data.winner === "X" ? "X" : "Bolinha") + " ganhou!";
+                    }
                 } else {
-                    const winnerText = data.winner === "X" ? "Jogador 1 (X)" : "Jogador 2 (O)";
-                    status.textContent = `Vencedor: ${winnerText}`;
+                    document.getElementById("message").innerText = "";
                 }
-            } else {
-                status.textContent = `Vez do ${data.board.filter(v => v === "X").length <= data.board.filter(v => v === "O").length ? "Jogador 1 (X)" : "Jogador 2 (O)"}`;
-            }
+                document.getElementById("player").innerText = data.winner ? "X" : 
+                    (document.getElementById("player").innerText === "X" ? "O" : "X");
+                document.querySelectorAll(".cell").forEach((cell, i) => cell.innerText = data.board[i]);
+                document.getElementById("scores").innerText = 
+                    `Pontuação - X: ${data.scores.X} | O: ${data.scores.O} | Empates: ${data.scores.Empates}`;
+                document.getElementById("rounds").innerText = `Rodadas: ${data.rounds}`;
+            });
+        }
 
-            roundsDisplay.textContent = `Rodadas: ${data.rounds}`;
-            scoresDisplay.textContent = `Jogador 1 (X): ${data.stats["Jogador 1"]} | Jogador 2 (O): ${data.stats["Jogador 2"]} | Empates: ${data.stats["Empates"]}`;
+        function updateBoard(board) {
+            document.querySelectorAll(".cell").forEach((cell, i) => cell.innerText = board[i]);
+        }
+
+        function resetRound() {
+            fetch("/reset_round")
+                .then(response => response.json())
+                .then(data => {
+                    updateBoard(data.board);
+                    document.getElementById("message").innerText = "";
+                });
+        }
+
+        function resetAll() {
+            fetch("/reset_all")
+                .then(response => response.json())
+                .then(data => {
+                    updateBoard(data.board);
+                    document.getElementById("message").innerText = "";
+                    document.getElementById("player").innerText = "X";
+                    document.getElementById("scores").innerText = 
+                        `Pontuação - X: ${data.scores.X} | O: ${data.scores.O} | Empates: ${data.scores.Empates}`;
+                    document.getElementById("rounds").innerText = `Rodadas: ${data.rounds}`;
+                });
         }
     </script>
 </body>
