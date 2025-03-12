@@ -19,7 +19,7 @@ Bem-vindo ao meu **Jogo da Velha Moderno**! Este é um projeto que desenvolvi en
 
 ## 📸 Visualização do Jogo
 
-![Jogo da Velha Moderno](jogo-da-velha.png)
+![Jogo da Velha Moderno](Jogo-da-Velha.png)
 
 *(Nota: Esta é uma captura de tela do jogo, adicionada ao repositório como `jogo-da-velha.png` pra mostrar meu progresso em aprendizado!)*
 
