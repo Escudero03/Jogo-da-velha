@@ -17,7 +17,7 @@
     <p id="rounds">Rodadas: {{ rounds }}</p>
     <button onclick="resetRound()">Reiniciar Rodada</button>
     <button onclick="resetAll()">Zerar Tudo</button>
-    <span id="dev">DEV APRENDIZADO</span>
+    <span id="dev">DEV - APRENDIZADO</span>
 
     <script>
         function makeMove(position) {
@@ -29,19 +29,26 @@
             .then(response => response.json())
             .then(data => {
                 updateBoard(data.board);
+                let messageDiv = document.getElementById("message");
                 if (data.winner) {
                     if (data.winner === "Empate") {
-                        document.getElementById("message").innerText = "Empate!";
+                        messageDiv.innerText = "Empate!";
+                        messageDiv.className = ""; // Remove classes de vencedor
                     } else {
                         let winnerText = data.winner === "X" ? "X" : "Bolinha";
-                        document.getElementById("message").innerText = "Vencedor " + winnerText + " ganhou!";
+                        messageDiv.innerText = "Vencedor " + winnerText + " ganhou!";
+                        messageDiv.className = data.winner === "X" ? "x-winner" : "o-winner";
                     }
                 } else {
-                    document.getElementById("message").innerText = "";
+                    messageDiv.innerText = "";
+                    messageDiv.className = "";
                 }
                 document.getElementById("player").innerText = data.winner ? "X" : 
                     (document.getElementById("player").innerText === "X" ? "O" : "X");
-                document.querySelectorAll(".cell").forEach((cell, i) => cell.innerText = data.board[i]);
+                document.querySelectorAll(".cell").forEach((cell, i) => {
+                    cell.innerText = data.board[i];
+                    cell.className = "cell " + data.board[i]; // Adiciona classe X ou O
+                });
                 document.getElementById("scores").innerText = 
                     `Pontuação - X: ${data.scores.X} | O: ${data.scores.O} | Empates: ${data.scores.Empates}`;
                 document.getElementById("rounds").innerText = `Rodadas: ${data.rounds}`;
@@ -49,7 +56,10 @@
         }
 
         function updateBoard(board) {
-            document.querySelectorAll(".cell").forEach((cell, i) => cell.innerText = board[i]);
+            document.querySelectorAll(".cell").forEach((cell, i) => {
+                cell.innerText = board[i];
+                cell.className = "cell " + board[i]; // Atualiza classe
+            });
         }
 
         function resetRound() {
@@ -58,6 +68,7 @@
                 .then(data => {
                     updateBoard(data.board);
                     document.getElementById("message").innerText = "";
+                    document.getElementById("message").className = "";
                 });
         }
 
@@ -67,6 +78,7 @@
                 .then(data => {
                     updateBoard(data.board);
                     document.getElementById("message").innerText = "";
+                    document.getElementById("message").className = "";
                     document.getElementById("player").innerText = "X";
                     document.getElementById("scores").innerText = 
                         `Pontuação - X: ${data.scores.X} | O: ${data.scores.O} | Empates: ${data.scores.Empates}`;

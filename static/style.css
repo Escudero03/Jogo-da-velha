@@ -1,128 +1,98 @@
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Gradiente azul-roxo */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom right, #4b0082, #00b7eb);
     min-height: 100vh;
     margin: 0;
-    position: relative; /* Para posicionar o texto piscante */
-}
-
-.container {
-    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
 }
 
 h1 {
-    color: #333;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-#board {
-    display: grid;
-    grid-template-columns: repeat(3, 110px);
-    grid-gap: 8px;
-    margin: 0 auto;
-    width: 350px;
-}
-
-.cell {
-    width: 110px;
-    height: 110px;
-    background-color: #fff;
-    border: 3px solid #333;
-    border-radius: 10px;
-    font-size: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s, background-color 0.3s;
-}
-
-.cell:hover {
-    background-color: #f0f0f0;
-    transform: scale(1.05);
-}
-
-.cell.x {
-    color: #e63946; /* Vermelho vibrante pra X */
-    font-weight: bold;
-}
-
-.cell.o {
-    color: #1d3557; /* Azul escuro pra O */
-    font-weight: bold;
-}
-
-.controls {
-    margin: 20px 0;
-}
-
-button {
-    padding: 12px 25px;
-    font-size: 16px;
-    background-color: #2ecc71; /* Verde esmeralda */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin: 0 10px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #27ae60; /* Verde mais escuro */
-}
-
-#reset-all {
-    background-color: #e74c3c; /* Vermelho pra zerar tudo */
-}
-
-#reset-all:hover {
-    background-color: #c0392b;
-}
-
-p {
-    font-size: 1.2em;
-    color: #333;
-    margin: 10px 0;
-}
-
-.stats {
-    background-color: #ecf0f1;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-.blinking-text {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg); /* Rotacionado verticalmente */
-    font-size: 2em;
-    font-weight: bold;
     color: #fff;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+    margin-bottom: 20px;
 }
 
 #message {
     font-size: 24px;
-    color: #fff;
-    text-align: center;
-    margin: 20px 0;
     font-weight: bold;
+    margin: 20px 0;
+    min-height: 30px;
+    color: #fff; /* Cor padrão (pra Empate) */
+}
+
+#message.x-winner {
+    color: #ff0000; /* Vermelho pro X */
+}
+
+#message.o-winner {
+    color: #0000ff; /* Azul pro O */
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    width: 310px;
+    margin: 0 auto 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.cell:hover {
+    transform: scale(1.05);
+}
+
+.cell.X { /* Cor do X no tabuleiro */
+    color: #ff0000;
+}
+
+.cell.O { /* Cor do O no tabuleiro */
+    color: #0000ff;
+}
+
+p {
+    color: #fff;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background: #ff4500;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #ff6347;
+}
+
+#dev {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    color: #fff;
+    font-size: 20px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
